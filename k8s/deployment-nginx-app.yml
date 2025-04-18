@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-app-deployment
+  namespace: dev-ns
+spec:
+  selector:
+    matchLabels:
+      app: nginx-app
+  template:
+    metadata:
+      labels:
+        app: nginx-app
+    spec:
+      containers:
+      - name: nginx-app
+        image: randilt/hello-world-nginx-app:latest
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "32Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 80
