@@ -44,11 +44,17 @@ kubectl create ingress nginx-app-ingress \
   --rule="demo.192.168.49.2.sslip.io/*=nginx-app-service:80" \
   -n dev-ns
 
+kubectl create ingress nginx-app-ingress \
+  --class=nginx \
+  --rule="demo.192.168.49.2.sslip.io/*=nginx-app-service:80" \
+  -n dev-ns
+
 
 // port-forwarding
 kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8081:80
 
-kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8081:80
+// this works - but not with ingress
+kubectl port-forward -n dev-ns svc/nginx-app-service 8081:8080
 
 
 > output
