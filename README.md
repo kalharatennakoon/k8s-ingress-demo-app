@@ -20,6 +20,8 @@ k get deploy -n dev-ns
 ```bash
 kubectl expose deployment nginx-app-deployment --name nginx-app-service --port=8080 --target-port=80 -n dev-ns
 
+The expose command parses the referenced Deployment object to extract valuable pairing details such as Name, Label, Selector, and containerPort to populate these values in the Service object.
+
 //verify
 k get svc -n dev-ns
 k describe svc nginx-app-service -n dev-ns
